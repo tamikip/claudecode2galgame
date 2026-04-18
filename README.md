@@ -47,6 +47,8 @@ CODEANY_MODEL=你的模型名
 
 Bun 会加载当前工作目录下的 `.env`；若你用手动 `export` / 系统环境变量，效果相同。
 
+使用下文「包装脚本」启动时，进程会先切换到**仓库根目录**，因此根目录下的 `.env` 仍会被正常加载。
+
 ## 3. 启动 Galgame
 
 在仓库根目录：
@@ -63,11 +65,22 @@ Galgame server (open-agent-sdk) listening on http://127.0.0.1:<端口>/
 
 在浏览器中打开该地址即可使用 `web/galgame/` 页面。
 
-### Windows 快捷方式
+### 从任意目录启动（包装脚本，推荐）
 
-双击或在命令行运行仓库内脚本（会先 `cd` 到仓库根目录再执行 `bun run galgame`）：
+脚本根据**自身所在位置**定位仓库根目录（`scripts/` 的上一级），不要求你事先 `cd` 到仓库。
 
-`scripts/start-galgame.bat`
+1. 把本仓库的 `scripts` 目录加入系统 **PATH**（用户环境变量即可）。
+2. **Windows**：在终端输入 `galgame`（会解析到 `galgame.cmd`）。
+3. **macOS / Linux**：先执行一次 `chmod +x scripts/galgame`，再在 PATH 里用 `galgame`。
+
+之后在任何当前目录下执行 `galgame`，都会先切到仓库根再运行 `bun run galgame`。
+
+### Windows 其它方式
+
+- **`scripts/galgame.cmd`**：与上面 PATH 方式相同，也可直接双击或用完整路径运行。
+- **`scripts/start-galgame.bat`**：带更多提示；出错时会 `pause` 方便查看（适合双击调试）。
+
+以上脚本都会先切换到仓库根目录再启动服务。
 
 ## 4. 端口与监听地址
 

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Galgame launcher: cd to repo root (this script lives in scripts/), then start server.
+# chmod +x scripts/galgame && add the "scripts" directory to PATH to run `galgame` from any directory.
+
+set -euo pipefail
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$REPO_ROOT"
+
+if ! command -v bun >/dev/null 2>&1; then
+  echo "[ERR] bun not found in PATH. Install from https://bun.sh/" >&2
+  exit 1
+fi
+
+if [[ ! -f package.json ]]; then
+  echo "[ERR] package.json not found. Expected repo root: $REPO_ROOT" >&2
+  exit 1
+fi
+
+exec bun run galgame
