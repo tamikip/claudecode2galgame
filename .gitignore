@@ -1,0 +1,35 @@
+node_modules
+.DS_Store
+dist
+coverage
+.env
+.env.*
+!.env.example
+*.log
+.idea
+.vscode
+*.suo
+
+# Claude/Cursor local state
+.claude/
+.cursor/
+
+# Bun
+bun/
+.bun/
+
+# Build / cache / temp
+*.tsbuildinfo
+.cache/
+tmp/
+temp/
+
+# Secrets (local)
+*.pem
+
+# OS / editor cruft
+Thumbs.db
+Desktop.ini
+
+# Misc temp / null-named
+nul
